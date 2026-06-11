@@ -793,7 +793,11 @@ function handleNumber(){
     if(isNaN(val)||val<0){errEl.textContent='請輸入有效數值（≥ 0）';return;}
 
     if(mode==='boards'){
-        if(val>0) val=Math.ceil(rnd(val/3))*3;
+        if(val>0){
+            const rounded=Math.ceil(rnd(val/1.5))*1.5;
+            if(rounded!==val) addBubble(`${val}m 無條件進位至 ${rounded}m（覆工版長度 1.5m 的倍數）`,'bot');
+            val=rounded;
+        }
     } else {
         /* 型鋼方案：無條件進位到1.5m倍數，不足型鋼整合的餘數用全覆工版補 */
         if(val>0){
